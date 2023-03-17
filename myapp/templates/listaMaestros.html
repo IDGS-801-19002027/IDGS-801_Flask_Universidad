@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block content%}
+{%from "_macros.html" import render_field%}
+
+<h2>Lista de Maestros</h2>
+<form action="addMaestro">
+    <button class="btn btn-success text-white">Agregar nuevo maestro</button>
+</form>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr class="tr-head">
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Correo</th>
+            <th>Estatus</th>
+            <th>Eliminar</th>
+            <th>Modificar</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for maestro in maestros %}
+        <tr>
+            <td>{{ maestro[0]  }}</td>
+            <td>{{ maestro[1]  }}</td>
+            <td>{{ maestro[2] }}</td>
+            <td>{{ maestro[3] }}</td>
+            <td>{{ maestro[4] }}</td>
+            
+            <td> 
+                {% if maestro[4] == 1 %}
+                <a href="deleteMaestro?id={{maestro[0]}}" class="btn btn-danger"><i class="icon-remove icon-white"></i>
+                    Eliminar</a>
+                {% endif %}
+            </td>
+            <td>
+                {% if maestro[4] == 1 %}
+                <a href="editMaestro?id={{maestro[0]}}" class="btn btn-warning"><i class="icon-pencil icon-white"></i>
+                    Modificar</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
